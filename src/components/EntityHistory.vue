@@ -29,6 +29,10 @@
       prop="type">
     </el-table-column>
     <el-table-column
+      label="pos"
+      prop="pos">
+    </el-table-column>
+    <el-table-column
       align="right">
       <template slot="header">
 </template>
@@ -80,7 +84,7 @@ export default {
         },
 
         async list() {
-            let post_data = { page: 0, limit: 10 };
+            let post_data = { page: 0, limit: 100 };
             const resp = await this.$http.post("/Entity/List", post_data)
             if (resp.data.success) {
                 this.entities = resp.data.data;

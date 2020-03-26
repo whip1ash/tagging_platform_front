@@ -82,84 +82,84 @@ export default {
     }
 }
 </script>
-
 <style scoped>
 .btn {
-    width: 120px;
+  width: 120px;
 }
 
 .start {
-    position: relative;
-    /* top: -180px; */
-    left: -240px
+  position: relative;
+  /* top: -180px; */
+  left: -240px;
 }
-.view{
-    position: relative;
-    left: -20px
+.view {
+  position: relative;
+  left: -20px;
 }
 .history {
-    position: relative;
-    /* top: -180px; */
-    right: -240px
+  position: relative;
+  /* top: -180px; */
+  right: -240px;
 }
-.title{
-    margin-top: -10px
+.title {
+  margin-top: -10px;
 }
 .box1,
 .box2 {
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    background-color: #ffffff;
-    /* margin-right: 20px */
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  /* margin-right: 20px */
 }
 
 ul li .id {
-    flex: 1;
-    display: inline-block;
-    border-right: 1px solid #ccc;
-    border-left: 1px solid #ccc;
+  flex: 1;
+  display: inline-block;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
 }
 
 ul li:nth-child(1) {
-    border-top: 1px solid #ccc;
+  border-top: 1px solid #ccc;
 }
 .box1 #idTitle,
 .box2 #idTitle {
-    position: relative;
-    left: -430px
+  position: relative;
+  left: -430px;
 }
 
 ul li .content {
-    flex: 10
+  flex: 10;
 }
 
 .box {
-    width: 80%;
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .box .done {
-    color: green;
-    /* line-height: 40px; */
-    display: inline-block;
+  color: green;
+  /* line-height: 40px; */
+  display: inline-block;
+  line-height: 5em;
 }
 
 ul {
-    margin-top: -20px;
-    margin-left: -40px
+  margin-top: -20px;
+  /* margint: -40px; */
 }
 
 ul li {
-    list-style: none;
-    line-height: 30px;
-    border-bottom: 1px solid #ccc;
-    display: flex;
+  list-style: none;
+  line-height: 30px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
 }
 
 .box2 .undone {
-    color: red;
-    /* line-height: 40px; */
-    display: inline-block
+  color: red;
+  /* line-height: 40px; */
+  display: inline-block;
+  line-height: 5em;
 }
 </style>
-

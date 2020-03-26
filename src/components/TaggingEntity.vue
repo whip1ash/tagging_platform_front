@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="box1">
-       <textarea  @click="getTextIndex"   v-model="sentence" />
+        <textarea @click="getTextIndex" v-model="sentence" />
     </div>
 
     <div class="box2">
@@ -117,7 +117,7 @@ export default {
         getTextIndex (e) {
             let target = e.target, start;
             if (target.selectionStart != 'undefined') {
-                    start = target.selectionStart;
+                start = target.selectionStart;
             } else {
                     start = '0'
                 }        
@@ -125,12 +125,15 @@ export default {
             let selectedText= this.getSelectionText()
             let end=selectedText.length+start
 
-            if(start == end){
+            let selectedText = this.getSelectionText()
+            let end = selectedText.length + start
+
+            if (start == end) {
                 return 0;
             }
 
             // selected object
-            var sel = {id: this.order,name: selectedText};
+            var sel = { id: this.order, name: selectedText };
 
             for (let i = 0; i < this.results.length; i++) {
                 if (this.results[i].entity === selectedText) {
@@ -138,7 +141,7 @@ export default {
                     return 0;
                 }
             }
-            
+
             this.results.push({
                 id: this.order,
                 tag_id: 0,
@@ -162,6 +165,15 @@ export default {
             }
             return selectedText;
         },
+        // getSelectionText() {
+        //    let selectedText = ''
+        //    if (window.getSelection) {
+        //       selectedText = window.getSelection().toString();
+        //    } else if (document.selection && document.selection.createRange) {
+        //       selectedText = document.selection.createRange().text;
+        //  }
+        //  return selectedText;
+        // },
 
         // handleClose(entity) {
         //     let result = this.results.filter(item => {
@@ -310,6 +322,7 @@ export default {
     margin-top: 20px;
     margin-right: 2px
 }
+
 textarea {
     margin-top: 30px;
     background-color: #FFF;
@@ -326,10 +339,9 @@ textarea {
     line-height: 30px;
     outline: 0;
     padding: 0 15px;
-    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 80%;
-    resize:none
+    resize: none
 }
-
 </style>

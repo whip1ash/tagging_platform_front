@@ -122,9 +122,6 @@ export default {
                     start = '0'
                 }        
             // console.log(index);
-            let selectedText= this.getSelectionText()
-            let end=selectedText.length+start
-
             let selectedText = this.getSelectionText()
             let end = selectedText.length + start
 

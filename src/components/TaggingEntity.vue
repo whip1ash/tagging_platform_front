@@ -162,23 +162,6 @@ export default {
             }
             return selectedText;
         },
-        // getSelectionText() {
-        //    let selectedText = ''
-        //    if (window.getSelection) {
-        //       selectedText = window.getSelection().toString();
-        //    } else if (document.selection && document.selection.createRange) {
-        //       selectedText = document.selection.createRange().text;
-        //  }
-        //  return selectedText;
-        // },
-
-        // handleClose(entity) {
-        //     let result = this.results.filter(item => {
-        //         return item['id'] !== entity.id
-        //     })
-        //     this.results = result
-        //     console.log(this.results)
-        // },
 
 
         handleSelectType(value) {
@@ -229,9 +212,7 @@ export default {
                     item.pos
                 );
             })
-
-
-            
+            this.$message.info("保存成功")
             console.log(this.results);
         },
 

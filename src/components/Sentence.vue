@@ -37,18 +37,19 @@
         </el-table-column>
         <el-table-column
         align="right">
-    <template slot="header">
-    </template>
+        </el-table-column>
+    </el-table>
 
-<!-- 
-<template slot-scope="scope">
-<el-button size="mini" type='primary' @click="handleEdit(scope.$index, scope.row)">
-    Edit</el-button>
-<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
-</template>
- -->
-    </el-table-column>
-  </el-table>
+    <div class="paginationClass">
+            <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange" :current-page="currentPage"
+            :page-sizes="[10, 20, 50, 100]"
+            :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+            >
+            </el-pagination>
+    </div>
+
 </template>
     </div>
 </template>
@@ -72,7 +73,11 @@ export default {
                 doing:0,
                 done:0,
                 all:0
-            }
+            },
+
+            // pages
+            currentPage: 1,
+            pageSize:50,
         }
     },
     created() {
@@ -82,8 +87,17 @@ export default {
         this.relationCount();
     },
     methods: {
-        async list() {
-            let post_data = { page: 0, limit: 20 };
+        handleSizeChange: function(pageSize) { // 每页条数切换
+            this.pageSize = pageSize
+            this.handleCurrentChange(this.currentPage);
+        },
+        handleCurrentChange: function(currentPage) {//页码切换
+            this.currentPage = currentPage
+            this.list(this.currentPage,this.pageSize)
+        },
+
+        async list(page = 1,pageSize = 50) {
+            let post_data = { page: page-1, limit: pageSize};
             const resp = await this.$http.post("/Sentence/List", post_data)
             if (resp.data.success) {
                 this.sentences = resp.data.data;

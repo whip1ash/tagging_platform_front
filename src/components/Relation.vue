@@ -18,6 +18,18 @@
                 </ul>
             </div>
         </div>
+
+    <div class="paginationClass">
+        <el-pagination
+        @size-change="handleSizeChangeDone"
+        @current-change="handleCurrentChangeDone" :current-page="currentPageDone"
+        :page-sizes="[10, 20, 50, 100]"
+        :page-size="pageSizeDone" layout="total, sizes, prev, pager, next, jumper"
+        >
+        </el-pagination>
+    </div>
+
+
         <div class="box2">
             <div class="title">
                 <span id="idTitle">ID</span>
@@ -32,6 +44,18 @@
                 </ul>
             </div>
         </div>
+
+    <div class="paginationClass">
+            <el-pagination
+            @size-change="handleSizeChangeDoing"
+            @current-change="handleCurrentChangeDoing" :current-page="currentPageDoing"
+            :page-sizes="[10, 20, 50, 100]"
+            :page-size="pageSizeDoing" layout="total, sizes, prev, pager, next, jumper"
+            >
+            </el-pagination>
+    </div>
+
+
     </div>
 
 </div>
@@ -43,6 +67,13 @@ export default {
             return {
                 sentencesDoing: [],
                 sentencesDone: [],
+
+                // pages
+                currentPageDoing: 1,
+                pageSizeDoing:20,
+
+                currentPageDone: 1,
+                pageSizeDone: 20,
             }
         },
     created(){
@@ -59,8 +90,27 @@ export default {
         handleChangey(){
              this.$router.push('/relationType')
         },
-        async listRelationSentencesDoing(){
-            let post_data = { referer: 'relation', page: 0, limit: 10 };
+
+        handleSizeChangeDone: function(pageSize) { // 每页条数切换
+            this.pageSizeDone = pageSize
+            this.handleCurrentChangeDone(this.currentPageDone);
+        },
+        handleCurrentChangeDone: function(currentPage) {//页码切换
+            this.currentPageDone = currentPage
+            this.listRelationSentencesDone(this.currentPageDone,this.pageSizeDone)
+        },
+
+        handleSizeChangeDoing: function(pageSize) { // 每页条数切换
+            this.pageSizeDoing = pageSize
+            this.handleCurrentChangeDoing(this.currentPage);
+        },
+        handleCurrentChangeDoing: function(currentPage) {//页码切换
+            this.currentPageDoing = currentPage
+            this.listRelationSentencesDoing(this.currentPageDoing,this.pageSizeDoing)
+        },        
+
+        async listRelationSentencesDoing(page=1,pageSize=20){
+            let post_data = { referer: 'relation', page: page - 1, limit: pageSize };
             const resp = await this.$http.post('/Sentence/Doing',post_data)
             if(resp.data.success){
                 this.sentencesDoing = resp.data.data;
@@ -69,8 +119,8 @@ export default {
                 console.log(resp.data);
             }
         },
-        async listRelationSentencesDone(){
-            let post_data = { referer: 'relation', page: 0, limit: 10 };
+        async listRelationSentencesDone(page=1,pageSize=20){
+            let post_data = { referer: 'relation',page: page - 1, limit: pageSize };
             const resp= await this.$http.post('/Sentence/Done',post_data)
             if(resp.data.success){
                 this.sentencesDone = resp.data.data;

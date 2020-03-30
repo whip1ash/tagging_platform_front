@@ -154,22 +154,17 @@ export default {
                 return 0
             }
             console.log(this.result)
-            // this.save(
 
-            // )
-
-            // this.results.filter(item => {
-            //     self.save(
-            //         item.id,
-            //         item.tag_id,
-            //         item.entity,
-            //         item.sentence_id,
-            //         item.type_id,
-            //         item.pos
-            //     );
-            // })
-            this.$message.info("保存成功")
-            console.log(this.result);
+            this.save(
+                this.result.tag_id,
+                this.result.sentence_id,
+                this.result.head_entity,
+                this.result.head_pos,
+                this.result.tail_entity,
+                this.result.tail_pos,
+                this.result.type_id
+            )
+           
         },
 
 
@@ -185,7 +180,8 @@ export default {
               head_pos:'',
               type_id:0
             }
-            this.order= 0
+            this.order= 0,
+            this.padding = []
         },
         async listRelationTypes() {
             const resp = await this.$http.get('/Relation/ListType')
@@ -208,23 +204,23 @@ export default {
                 this.$message.error(resp.data.msg);
             }
         },
-        async save(id,tag_id, entity, sentence_id, type, pos) {
+        async save(tag_id, sentence_id, head_entity, head_pos, tail_entity, tail_pos, type_id) {
             let post_data = {
                 tag_id: tag_id,
-                entity: entity,
                 sentence_id: sentence_id,
-                pos: pos,
-                type_id: type
+                head_entity: head_entity,
+                head_pos: head_pos,
+                tail_entity: tail_entity,
+                tail_pos: tail_pos,
+                type_id: type_id
             };
-            const resp = await this.$http.post("/Entity/Save", post_data);
+            const resp = await this.$http.post("/Relation/Save", post_data);
             if (resp.data.success) {
-                this.results.filter(item => {
-                    if(item.id == id){
-                        item.tag_id = resp.data.data.tag_id
-                    }
-                })
+                this.result.tag_id = resp.data.data.tag_id
+                this.$message.info("保存成功")
             } else {
                 console.log(resp.data);
+                this.$message.error("保存失败")
                 this.$message.error(resp.data.msg);
             }
         }

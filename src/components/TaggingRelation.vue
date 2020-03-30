@@ -153,7 +153,7 @@ export default {
             if(!this.check()){
                 return 0
             }
-            console.log(this.result)
+            // console.log(this.result)
 
             this.save(
                 this.result.tag_id,
@@ -188,7 +188,7 @@ export default {
             if (resp.data.success) {
                 this.relationTypes = resp.data.data;
             } else {
-                console.log(resp.data);
+                // console.log(resp.data);
                 this.$message.error(resp.data.msg);
             }
         },
@@ -200,7 +200,7 @@ export default {
                 this.sentence = resp.data.data[0].content;
                 this.result.sentence_id = resp.data.data[0].id
             } else {
-                console.log(resp.data);
+                // console.log(resp.data);
                 this.$message.error(resp.data.msg);
             }
         },
@@ -219,7 +219,7 @@ export default {
                 this.result.tag_id = resp.data.data.tag_id
                 this.$message.info("保存成功")
             } else {
-                console.log(resp.data);
+                // console.log(resp.data);
                 this.$message.error("保存失败")
                 this.$message.error(resp.data.msg);
             }

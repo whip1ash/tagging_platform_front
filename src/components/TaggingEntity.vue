@@ -97,9 +97,12 @@ export default {
     methods: {
         ok() {
             this.$Message.info("tag的type选择成功!");
+            this.padding = []
+
         },
         cancel() {
             this.$Message.info("取消成功!");
+            this.padding = []
         },
         click(entityId) {
             this.currentEntityId = entityId; 
@@ -165,27 +168,38 @@ export default {
 
 
         handleSelectType(value) {
+            if(value == undefined){
+                return 0
+            }
+
+
             let self = this
-            let res = this.results.filter(item => {
-                if(item.id === self.currentEntityId){
-                    item.type_id = value
-                    return item
-                }else{
-                    return false
+            let res = false
+            // res = this.results.filter(item => {
+            //     if(item.id === self.currentEntityId){
+            //         item.type_id = value
+            //         return true
+            //     }
+            // })
+
+            for(var i = 0 ;i<this.results.length;i++){
+                if(this.results[i].id == self.currentEntityId){
+                    this.results[i].type_id = value
+                    res = true
+                    break
                 }
-            })
+            }
 
             if(!res){
                 this.$message.error("handleSelectType function error! Set entity type failed!")
             }
-            // }else{
-            //     console.log(this.results);
-            // }
+            // console.log(this.results)
+            
         },
 
         check(){
             let res = this.results.filter(item => {
-                if(item.type_id == 0){
+                if(item.type_id == 0 || item.type_id == undefined){
                     return item
                 }
             })

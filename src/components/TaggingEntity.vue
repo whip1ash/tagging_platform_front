@@ -227,7 +227,7 @@ export default {
                 );
             })
             this.$message.info("保存成功")
-            console.log(this.results);
+            // console.log(this.results);
         },
 
         clear(){
@@ -248,7 +248,7 @@ export default {
             if (resp.data.success) {
                 this.entityTypes = resp.data.data;
             } else {
-                console.log(resp.data);
+                // console.log(resp.data);
                 this.$message.error(resp.data.msg);
             }
         },
@@ -260,7 +260,7 @@ export default {
                 this.sentence = resp.data.data[0].content;
                 this.sentence_id = resp.data.data[0].id
             } else {
-                console.log(resp.data);
+                // console.log(resp.data);
                 this.$message.error(resp.data.msg);
             }
         },
@@ -280,7 +280,7 @@ export default {
                     }
                 })
             } else {
-                console.log(resp.data);
+                // console.log(resp.data);
                 this.$message.error(resp.data.msg);
             }
         }

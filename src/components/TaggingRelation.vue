@@ -226,7 +226,7 @@ export default {
             }
         },
         async delSentence(){
-            let post_data = {id: this.sentence_id}
+            let post_data = {id: this.result.sentence_id}
             const resp = await this.$http.post("/Sentence/Del", post_data);
             if (resp.data.success) {
                 this.$message.info("删除该句话成功")

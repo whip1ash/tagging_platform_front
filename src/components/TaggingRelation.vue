@@ -33,6 +33,7 @@
     </div>
 
     <div class="btn">
+        <el-button type="primary" round @click="delSentence">delete this sentence</el-button>
         <el-button type="primary" round @click='deleteTag'>delete local tag</el-button>
         <el-button type="primary" round @click='handleSave'>save</el-button>
         <el-button type="primary" round @click="getSentence">next</el-button>
@@ -221,6 +222,17 @@ export default {
             } else {
                 // console.log(resp.data);
                 this.$message.error("保存失败")
+                this.$message.error(resp.data.msg);
+            }
+        },
+        async delSentence(){
+            let post_data = {id: this.sentence_id}
+            const resp = await this.$http.post("/Sentence/Del", post_data);
+            if (resp.data.success) {
+                this.$message.info("删除该句话成功")
+                this.getSentence();
+            } else {
+                // console.log(resp.data);
                 this.$message.error(resp.data.msg);
             }
         }

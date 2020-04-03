@@ -5,6 +5,10 @@
     </div>
 
     <div class="box2">
+        <div class="btn">
+            <el-button type="primary" round @click="changeSelectedState">更改选择类型</el-button>
+            当前类型为：{{selectedState}}
+        </div>
         <div style="margin-top: 20px">
             <Tag
             color="blue"
@@ -45,8 +49,7 @@
 export default {
     data() {
         return {
-            //iview
-            // modalSwitch: false,
+            selectedState: '头实体',
 
             // default
             relationTypes: [],
@@ -67,6 +70,16 @@ export default {
     },
 
     methods: {
+        changeSelectedState(){
+            if(this.order == 0){
+                this.selectedState = '尾实体'
+                this.order = 1
+            }else{
+                this.selectedState = '头实体'
+                this.order = 0
+            }
+            
+        },
         deleteTag() {
             let protected_key = ['tag_id','sentence_id']
             for(var k in this.result){
@@ -99,15 +112,15 @@ export default {
             head_pos = `${start},${end}`
             this.result.head_entity = head_entity
             this.result.head_pos = head_pos
-            this.result.tail_entity = ''
-            this.result.tail_pos = ''
-            this.order++
+            //手动切换
+            // this.order++
           }else if(this.order == 1){
             tail_entity = selectedText
             tail_pos = `${start},${end}` 
             this.result.tail_entity = tail_entity
             this.result.tail_pos = tail_pos
-            this.order = 0
+            //手动切换
+            // this.order = 0
           }else{
             this.$message.error("只能选择头实体和尾实体")
           }
